@@ -109,7 +109,7 @@ while running:
     # Draw the chessboard
     for file in range(BOARD_SIZE):
         for rank in range(BOARD_SIZE):
-            color = WHITE if (file + rank) % 2 == 0 else BLACK
+            color = BLACK if (file + rank) % 2 == 0 else WHITE
             rect = pygame.Rect(
                 file * SQUARE_SIZE, (7 - rank) * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE
             )
