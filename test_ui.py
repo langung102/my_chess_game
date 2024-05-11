@@ -25,6 +25,16 @@ pygame.display.set_caption("Chess Game")
 # Create a chess board
 board = chess.Board()
 
+# Function to highlight legal moves for the selected piece
+def highlight_legal_moves(square):
+    legal_moves = board.legal_moves
+    for move in legal_moves:
+        if move.from_square == square:
+            file = chess.square_file(move.to_square)
+            rank = 7 - chess.square_rank(move.to_square)
+            rect = pygame.Rect(file * SQUARE_SIZE, rank * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE)
+            pygame.draw.rect(screen, HIGHLIGHT_COLOR, rect, 4)
+
 # Function to make a random move for the AI side
 def minimax(board, depth, maximizing_player, alpha, beta):
     if depth == 0 or board.is_game_over():
@@ -53,18 +63,41 @@ def minimax(board, depth, maximizing_player, alpha, beta):
                 break
         return min_eval
 
-def make_minimax_move(board, depth):
-    #Enemy if BLACK
+def make_minimax_move(board, depth, is_white):
     best_move = None
-    best_eval = float('inf')
-    for move in board.legal_moves:
-        board.push(move)
-        eval = minimax(board, depth - 1, True, -10000, 10000)
-        board.pop()
-        if eval < best_eval:
-            best_eval = eval
-            best_move = move
+    if is_white:
+        best_eval = float('-inf')
+        for move in board.legal_moves:
+            if chess.square_rank(move.to_square) == 7 and board.piece_at(move.from_square).piece_type == chess.PAWN:
+                move.promotion = chess.QUEEN
+                print("promotion!")
+            board.push(move)
+            eval = minimax(board, depth - 1, False, -10000, 10000)
+            board.pop()
+            if eval > best_eval:
+                best_eval = eval
+                best_move = move    
+    else:
+        best_move = None
+        best_eval = float('inf')
+        for move in board.legal_moves:
+            if chess.square_rank(move.to_square) == 7 and board.piece_at(move.from_square).piece_type == chess.PAWN:
+                move.promotion = chess.QUEEN
+                print("promotion!")
+            board.push(move)
+            eval = minimax(board, depth - 1, True, -10000, 10000)
+            board.pop()
+            if eval < best_eval:
+                best_eval = eval
+                best_move = move
     board.push(best_move)
+    return best_move
+
+def make_random_move(board):
+    legal_moves = list(board.legal_moves)
+    random_move = random.choice(legal_moves)
+    board.push(random_move)
+    return random_move
 
 # Main loop
 running = True
@@ -86,11 +119,14 @@ while running and not board.is_game_over():
                         selected_square = square
                 else:
                     move = chess.Move(selected_square, square)
+                    if chess.square_rank(move.to_square) == 7 and board.piece_at(move.from_square).piece_type == chess.PAWN:
+                        move.promotion = chess.QUEEN
                     if move in board.legal_moves:
                         board.push(move)
                     selected_square = None
             else:  # AI's turn
-                make_minimax_move(board, 3)
+                # make_random_move(board)
+                make_minimax_move(board, 3, False)
 
     # Draw the chessboard
     for file in range(BOARD_SIZE):
@@ -113,6 +149,7 @@ while running and not board.is_game_over():
                                      SQUARE_SIZE, SQUARE_SIZE)
         pygame.draw.rect(screen, HIGHLIGHT_COLOR, highlight_rect, 4)
 
+    highlight_legal_moves(selected_square)
     # Update the display
     pygame.display.flip()
 

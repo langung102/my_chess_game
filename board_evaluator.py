@@ -29,18 +29,18 @@ def evaluate(board):
     
     material = 100 * (wp - bp) + 300 * (wn - bn) + 300 * (wb - bb) + 500 * (wr - br) + 900 * (wq - bq)
     
-    pawn_sum = sum([PAWN_TABLE[i] for i in board.pieces(chess.PAWN, chess.WHITE)])
-    pawn_sum = pawn_sum + sum([-PAWN_TABLE[chess.square_mirror(i)] for i in board.pieces(chess.PAWN, chess.BLACK)])
-    knight_sum = sum([KNIGHTS_TABLE[i] for i in board.pieces(chess.KNIGHT, chess.WHITE)])
-    knight_sum = knight_sum + sum([-KNIGHTS_TABLE[chess.square_mirror(i)] for i in board.pieces(chess.KNIGHT, chess.BLACK)])
-    bishop_sum = sum([BISHOPS_TABLE[i] for i in board.pieces(chess.BISHOP, chess.WHITE)])
-    bishop_sum = bishop_sum + sum([-BISHOPS_TABLE[chess.square_mirror(i)] for i in board.pieces(chess.BISHOP, chess.BLACK)])
-    rook_sum = sum([ROOKS_TABLE[i] for i in board.pieces(chess.ROOK, chess.WHITE)]) 
-    rook_sum = rook_sum + sum([-ROOKS_TABLE[chess.square_mirror(i)] for i in board.pieces(chess.ROOK, chess.BLACK)])
-    queens_sum = sum([QUEENS_TABLE[i] for i in board.pieces(chess.QUEEN, chess.WHITE)]) 
-    queens_sum = queens_sum + sum([-QUEENS_TABLE[chess.square_mirror(i)] for i in board.pieces(chess.QUEEN, chess.BLACK)])
-    kings_sum = sum([KINGS_TABLE[i] for i in board.pieces(chess.KING, chess.WHITE)]) 
-    kings_sum = kings_sum + sum([-KINGS_TABLE[chess.square_mirror(i)] for i in board.pieces(chess.KING, chess.BLACK)])
+    pawn_sum = sum([PAWN_TABLE_HARD[i] for i in board.pieces(chess.PAWN, chess.WHITE)])
+    pawn_sum = pawn_sum + sum([-PAWN_TABLE_HARD[chess.square_mirror(i)] for i in board.pieces(chess.PAWN, chess.BLACK)])
+    knight_sum = sum([KNIGHTS_TABLE_HARD[i] for i in board.pieces(chess.KNIGHT, chess.WHITE)])
+    knight_sum = knight_sum + sum([-KNIGHTS_TABLE_HARD[chess.square_mirror(i)] for i in board.pieces(chess.KNIGHT, chess.BLACK)])
+    bishop_sum = sum([BISHOPS_TABLE_HARD[i] for i in board.pieces(chess.BISHOP, chess.WHITE)])
+    bishop_sum = bishop_sum + sum([-BISHOPS_TABLE_HARD[chess.square_mirror(i)] for i in board.pieces(chess.BISHOP, chess.BLACK)])
+    rook_sum = sum([ROOKS_TABLE_HARD[i] for i in board.pieces(chess.ROOK, chess.WHITE)]) 
+    rook_sum = rook_sum + sum([-ROOKS_TABLE_HARD[chess.square_mirror(i)] for i in board.pieces(chess.ROOK, chess.BLACK)])
+    queens_sum = sum([QUEENS_TABLE_HARD[i] for i in board.pieces(chess.QUEEN, chess.WHITE)]) 
+    queens_sum = queens_sum + sum([-QUEENS_TABLE_HARD[chess.square_mirror(i)] for i in board.pieces(chess.QUEEN, chess.BLACK)])
+    kings_sum = sum([KINGS_TABLE_HARD[i] for i in board.pieces(chess.KING, chess.WHITE)]) 
+    kings_sum = kings_sum + sum([-KINGS_TABLE_HARD[chess.square_mirror(i)] for i in board.pieces(chess.KING, chess.BLACK)])
     
     boardvalue = material + pawn_sum + knight_sum + bishop_sum + rook_sum + queens_sum + kings_sum
     
