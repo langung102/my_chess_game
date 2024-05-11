@@ -143,6 +143,34 @@ while running:
 
     # Update the display
     pygame.display.flip()
+    # Check if the game is over
+    if board.is_game_over():
+        # Determine the winner
+        (winner, color) = (
+            ("Black", (255, 0, 0))
+            if board.turn == chess.WHITE
+            else ("White", (0, 255, 0))
+        )
+        # Create a text surface
+        text = font.render(f"Game Over: {winner} wins!", True, color)
 
+        # Get the size of the text surface
+        text_rect = text.get_rect()
+
+        # Center the text surface
+        text_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+
+        # Draw the text surface on the screen
+        screen.blit(text, text_rect)
+        pygame.display.flip()
+
+        running = False
+
+
+waiting = True
+while waiting:
+    for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            waiting = False
 # Quit Pygame
 pygame.quit()
