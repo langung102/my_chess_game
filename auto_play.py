@@ -12,8 +12,8 @@ from board_evaluator import Evaluation
 level = "HARD"
 is_white_random = False
 is_black_random = False
-depth_white = 1
-depth_black = 4
+depth_white = 4
+depth_black = 3
 ############################################
 
 # Initialize Pygame
@@ -107,7 +107,8 @@ def make_minimax_move(board, depth, is_white):
             if eval < best_eval:
                 best_eval = eval
                 best_move = move
-    board.push(best_move)
+    if best_move is not None:
+        board.push(best_move)
     return best_move
 
 def make_random_move(board):

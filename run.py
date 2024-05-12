@@ -109,7 +109,8 @@ def make_minimax_move(board, depth, is_white):
             if eval < best_eval:
                 best_eval = eval
                 best_move = move
-    board.push(best_move)
+    if best_move is not None:
+        board.push(best_move)
     return best_move
 
 def make_random_move(board):
@@ -193,14 +194,18 @@ while running and not board.is_game_over():
     pygame.display.flip()
     # Check if the game is over
     if board.is_game_over():
-        # Determine the winner
-        (winner, color) = (
-            ("Black", (255, 0, 0))
-            if board.turn == chess.WHITE
-            else ("White", (0, 255, 0))
-        )
-        # Create a text surface
-        text = font.render(f"Game Over: {winner} wins!", True, color)
+        print(board.result())
+        if board.outcome().winner == None:
+            text = font.render(f"{board.outcome().termination}", True, (0, 255, 0))
+        else:
+            # Determine the winner
+            (winner, color) = (
+                ("Black", (255, 0, 0))
+                if board.turn == chess.WHITE
+                else ("White", (0, 255, 0))
+            )
+            # Create a text surface
+            text = font.render(f"Game Over: {winner} wins!", True, color)
 
         # Get the size of the text surface
         text_rect = text.get_rect()
