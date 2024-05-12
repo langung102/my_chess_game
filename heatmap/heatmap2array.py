@@ -22,7 +22,7 @@ def image_to_chessboard_array(image_path):
     return image_array
 
 # Example usage:
-image_path = "pawn.png"  # Change this to the path of your chessboard heatmap image
+image_path = "king_easy.png"  # Change this to the path of your chessboard heatmap image
 chessboard_array = image_to_chessboard_array(image_path).tolist()
 chessboard_array = [[pixel - 255 for pixel in row] for row in chessboard_array]
 print("[")

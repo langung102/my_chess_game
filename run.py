@@ -8,7 +8,7 @@ from board_evaluator import Evaluation
 
 ############################################
 #####SELECT LEVEL (EASY, MEDIUM or HARD)####
-level = "EASY"
+level = "HARD"
 ############################################
 
 # Initialize Pygame

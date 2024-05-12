@@ -4,13 +4,19 @@ from board_pieces_tables import *
 class Evaluation:
     def __init__(self, level):
         if (level == "EASY"):
-            self.PAWN_TABLE = PAWN_TABLE
-            self.KNIGHTS_TABLE = KNIGHTS_TABLE
-            self.BISHOPS_TABLE = BISHOPS_TABLE
-            self.ROOKS_TABLE = ROOKS_TABLE
-            self.QUEENS_TABLE = QUEENS_TABLE
-            self.KINGS_TABLE = KINGS_TABLE  
+            self.PAWN_TABLE = PAWN_TABLE_EASY
+            self.KNIGHTS_TABLE = KNIGHTS_TABLE_EASY
+            self.BISHOPS_TABLE = BISHOPS_TABLE_EASY
+            self.ROOKS_TABLE = ROOKS_TABLE_EASY
+            self.QUEENS_TABLE = QUEENS_TABLE_EASY
+            self.KINGS_TABLE = KINGS_TABLE_EASY
         elif (level == "MEDIUM"):
+            self.PAWN_TABLE = PAWN_TABLE_MEDIUM
+            self.KNIGHTS_TABLE = KNIGHTS_TABLE_MEDIUM
+            self.BISHOPS_TABLE = BISHOPS_TABLE_MEDIUM
+            self.ROOKS_TABLE = ROOKS_TABLE_MEDIUM
+            self.QUEENS_TABLE = QUEENS_TABLE_MEDIUM
+            self.KINGS_TABLE = KINGS_TABLE_MEDIUM
             return
         elif (level == "HARD"):
             self.PAWN_TABLE = PAWN_TABLE_HARD
