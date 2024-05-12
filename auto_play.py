@@ -12,8 +12,8 @@ from board_evaluator import Evaluation
 level = "HARD"
 is_white_random = False
 is_black_random = False
-depth_white = 4
-depth_black = 3
+depth_white = 1
+depth_black = 4
 ############################################
 
 # Initialize Pygame
